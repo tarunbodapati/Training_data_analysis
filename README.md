@@ -23,7 +23,7 @@ tarunbodapati/Training_data_analysis
 
 
 
-**Project Description**
+**Project Description**: 
 Reads all data from a .Json file (use the attached file trainings.txt).
 Generate output as JSON in the three following ways.
 List each completed training with a count of how many people have completed that training.
