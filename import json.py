@@ -1,11 +1,18 @@
 import json
 from datetime import datetime, timedelta
+import requests
 
-
-# Load JSON data from file
+# Load JSON data from URL or file
 def load_json(file_path):
-    with open(file_path, 'r') as file:
-        return json.load(file)
+    if file_path.startswith("http"):
+        response = requests.get(file_path)
+        if response.status_code == 200:
+            return json.loads(response.text)
+        else:
+            raise Exception(f"Failed to load data from URL: {response.status_code}")
+    else:
+        with open(file_path, 'r') as file:
+            return json.load(file)
 
 # 1. Function to count the completions for each training course
 def count_completed_trainings(data):
@@ -77,4 +84,4 @@ def process_trainings(file_path):
         json.dump(expiring_trainings, f, indent=4)
 
 # Run the process
-process_trainings('C:/Users/Bodapati Tarun Kumar/Desktop/project/trainings.txt')
+process_trainings('https://raw.githubusercontent.com/tarunbodapati/Training_data_analysis/main/trainings.txt')
